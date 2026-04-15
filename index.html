@@ -1,13 +1,61 @@
 <!DOCTYPE html>
 <html lang="en">
+
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Paint! - Zugbi Juan Pedro</title>
     <link rel="stylesheet" href="/css/style.css">
 </head>
+
 <body>
 
-    
+    <header>
+        <div class="menu-bar">
+            <button>Limpiar Lienzo</button>
+            <button>Guardar Imagen</button>
+        </div>
+    </header>
+
+    <main>
+        <toolbar class="toolbar">
+            <div>
+                <button id="btn-lapiz">Lápiz</button>
+                <label>Grosor</label>
+                <input id="grosor-lapiz" type="range" min="1" max="50" value="5">
+            </div>
+            <div>
+                <button id="btn-goma">Goma</button>
+                <label>Grosor</label>
+                <input id="grosor-goma" type="range" min="1" max="50" value="10">
+            </div>
+            <div>
+                <label>Color</label>
+                <input id="nroColor" type="color">
+            </div>
+            <div class="toolbar">
+                <label>Filtros simples</label>
+                <button>Escala de grises</button>
+                <button>Negativo</button>
+                <button>Binarización</button>
+                <button>Sepia</button>
+                <input type="range" name="Brillo" min="0" max="100" value="50">
+            </div>
+            <div class="toolbar">
+                <label>Filtros avanzados</label>
+                <button>Saturación</button>
+                <button>Detección de bordes</button>
+                <button>blur</button>
+            </div>
+        </toolbar>
+        <div class="canvas-container">
+            <canvas id="lienzo" width="800" height="600"></canvas>
+        </div>
+    </main>
+
+    <script src="js/pen.js"></script>
+    <script src="js/paint.js"></script>
+
 </body>
+
 </html>

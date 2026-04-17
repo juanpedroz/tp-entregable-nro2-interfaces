@@ -14,6 +14,7 @@
         <div class="menu-bar">
             <button>Limpiar Lienzo</button>
             <button>Guardar Imagen</button>
+            <input type="file" id="cargaImagen">
         </div>
     </header>
 
@@ -35,10 +36,10 @@
             </div>
             <div class="toolbar">
                 <label>Filtros simples</label>
-                <button>Escala de grises</button>
-                <button>Negativo</button>
-                <button>Binarización</button>
-                <button>Sepia</button>
+                <button id="btn-escalaGrises">Escala de grises</button>
+                <button id="btn-negativo">Negativo</button>
+                <button id="btn-sepia">Sepia</button>
+                <button id="btn-binarizacion">Binarización</button>                
                 <input type="range" name="Brillo" min="0" max="100" value="50">
             </div>
             <div class="toolbar">
@@ -53,6 +54,8 @@
         </div>
     </main>
 
+    <script src="js/filtroSimple.js"></script>
+    <script src="js/image.js"></script>
     <script src="js/pen.js"></script>
     <script src="js/paint.js"></script>
 

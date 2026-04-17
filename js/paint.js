@@ -61,6 +61,7 @@ botonGoma.addEventListener("click", function () { // click sobre botón goma
     estilo = grosorGoma.value;
 }); // eraserButton click
 
+
 function main() {
     
 }

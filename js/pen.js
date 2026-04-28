@@ -1,11 +1,11 @@
-class Pen {
+export class Pen {
     constructor(posX, posY, fill, estilo) {
-        this.antX = posX;
-        this.antY = posY;
         this.posX = posX;
         this.posY = posY;
         this.fill = fill;
         this.estilo = estilo;
+        this.antX = posX;
+        this.antY = posY;
     } // constructor()
 
     moveTo(posX, posY) {
@@ -26,4 +26,4 @@ class Pen {
         ctx.closePath();
      } // draw()
 
-} // class Pen
+} 

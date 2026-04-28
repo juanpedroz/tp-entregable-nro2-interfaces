@@ -12,8 +12,8 @@
 
     <header>
         <div class="menu-bar">
-            <button>Limpiar Lienzo</button>
-            <button>Guardar Imagen</button>
+            <button id="btn-guardar">Guardar</button>
+            <button id="btn-borrar-canvas">Limpiar Lienzo</button>
             <input type="file" id="cargaImagen">
         </div>
     </header>
@@ -33,21 +33,31 @@
             <div>
                 <label>Color</label>
                 <input id="nroColor" type="color">
+                <br></br>
             </div>
+            <label for="toolbar">Filtros simples</label>
             <div class="toolbar">
-                <label>Filtros simples</label>
                 <button id="btn-imageIni">Imagen inicial</button>
                 <button id="btn-escalaGrises">Escala de grises</button>
                 <button id="btn-negativo">Negativo</button>
                 <button id="btn-sepia">Sepia</button>
-                <button id="btn-binarizacion">Binarización</button>                
-                <input type="range" name="Brillo" min="0" max="100" value="50">
+                <button id="btn-binarizacion">Binarización</button>
+                <div>
+                    <button id="btn-r" class="btn-rgb">R</button>
+                    <button id="btn-g" class="btn-rgb">G</button>
+                    <button id="btn-b" class="btn-rgb">B</button>
+                    <br></br>   
+                </div>
+                <label for="btn-brillo">Brillo:</label>
+                <input id="btn-brillo" type="range" min="-50" max="50" value="0">
+                <span id="valorBrillo">0</span>
             </div>
+            <label for="toolbar">Filtros avanzados</label>
             <div class="toolbar">
-                <label>Filtros avanzados</label>
-                <button>Saturación</button>
-                <button>Detección de bordes</button>
-                <button>blur</button>
+                <label for="btn-saturacion">Saturación:</label>
+                <input id="btn-saturacion" type="range" min="0" max="3" value="1">
+                <button id="btn-bordes">Detección de bordes</button>
+                <button id="btn-blur">blur</button>
             </div>
         </toolbar>
         <div class="canvas-container">
@@ -55,10 +65,7 @@
         </div>
     </main>
 
-    <script src="js/filtroSimple.js"></script>
-    <script src="js/image.js"></script>
-    <script src="js/pen.js"></script>
-    <script src="js/paint.js"></script>
+    <script type="module" src="js/botones.js"></script>
 
 </body>
 

@@ -1,9 +1,11 @@
+import { ctx } from './paint.js';
+
+export let imageData;
+export const img = new Image();
+export let imageDataOriginal;
 
 let cargaImagen = document.getElementById("cargaImagen");
 
-let imageData;
-let data;
-let img = new Image();
 
 // --------------------------------------------------
 // Manejo de imagen
@@ -21,8 +23,15 @@ cargaImagen.addEventListener("change", function (e) {
 
 img.onload = () => { //Cargo imageData
     ctx.drawImage(img, 0, 0, img.width, img.height);
-    imageData = ctx.getImageData(0, 0, img.width, img.height); // Obtengo imagen
-    data = imageData.data; // Obtengo arreglo de pixeles
+    imageData = ctx.getImageData(0, 0, img.width, img.height);
+    imageDataOriginal = new ImageData(new Uint8ClampedArray(imageData.data), imageData.width, imageData.height);
 };
+
+export function restaurarImagen (){
+    if (!imageDataOriginal) return;
+    imageData.data.set(imageDataOriginal.data);
+    // Dibujo la imagen limpia en el canvas
+    ctx.putImageData(imageData, 0, 0);
+}
 
 

@@ -1,81 +1,49 @@
 
-
-let btnImageIni = document.getElementById("btn-imageIni");
-let btnEscalaGrises = document.getElementById("btn-escalaGrises");
-let btnNegativo = document.getElementById("btn-negativo");
-let btnSepia = document.getElementById("btn-sepia");
-let btnBinarizacion = document.getElementById("btn-binarizacion");
-
-
 // --------------------------------------------------
-// Comportamiento de los botones de filtros
+// Funciones de filtros simples
 // --------------------------------------------------
 
-
-btnImageIni.addEventListener("click", function () {
-
-    if (!img) return
-    ctx.filter = 'none'; // Quito el filtro
-    ctx.drawImage(img, 0, 0);
-
-});
-
-btnEscalaGrises.addEventListener("click", function () {
-
-    if (!data) return // Sentencia de control
-    let auxData = data; // Utilizo estructura auxiliar para mantener imagen original
-    for (let i = 0; i < auxData.length; i += 4) {
-        const promedio = (auxData[i] + auxData[i + 1] + auxData[i + 2]) / 3;
+export function escalaGrises(ctx, imageData) {
+    if (!imageData) return;
+    let data = imageData.data;
+    for (let i = 0; i < data.length; i += 4) {
+        const promedio = (data[i] + data[i + 1] + data[i + 2]) / 3;
         //Obtuve los valores iniciales y se setearon los nuevos
-        auxData[i] = promedio; // Rojo
-        auxData[i + 1] = promedio; // Verde
-        auxData[i + 2] = promedio; // Azul
+        data[i] = promedio; // Rojo
+        data[i + 1] = promedio; // Verde
+        data[i + 2] = promedio; // Azul
     }
-
-    imageData.data = auxData; // Actualizo arreglo de pixeles
-
     ctx.putImageData(imageData, 0, 0); // Actualizo canvas
+}
 
-});
-
-btnSepia.addEventListener("click", function () {
-
-    if (!data) return // Sentencia de control
-    let auxData = data; // Utilizo estructura auxiliar para mantener imagen original
-
-    for (let i = 0; i < auxData.length; i += 4) {
-        const r = auxData[i], g = auxData[i + 1], b = auxData[i + 2];
-        auxData[i] = (r * 0.393) + (g * 0.769) + (b * 0.189); // Rojo
-        auxData[i + 1] = (r * 0.349) + (g * 0.686) + (b * 0.168); // Verde
-        auxData[i + 2] = (r * 0.272) + (g * 0.534) + (b * 0.131); // Azul
+export function sepia(ctx, imageData) {
+    if (!imageData) return;
+    let data = imageData.data;
+    for (let i = 0; i < data.length; i += 4) {
+        const r = data[i], g = data[i + 1], b = data[i + 2];
+        data[i] = (r * 0.393) + (g * 0.769) + (b * 0.189); // Rojo
+        data[i + 1] = (r * 0.349) + (g * 0.686) + (b * 0.168); // Verde
+        data[i + 2] = (r * 0.272) + (g * 0.534) + (b * 0.131); // Azul
     }
-
-    imageData.data = auxData; // Actualizo arreglo de pixeles
-
     ctx.putImageData(imageData, 0, 0); // Actualizo canvas
+}
 
-});
-
-btnNegativo.addEventListener("click", function () {
-
-    if (!data) return // Sentencia de control
-    let auxData = data; // Utilizo estructura auxiliar para mantener imagen original
-    for (let i = 0; i < auxData.length; i += 4) {
-        auxData[i] = 255 - auxData[i];     // R
-        auxData[i + 1] = 255 - auxData[i + 1]; // G
-        auxData[i + 2] = 255 - auxData[i + 2]; // B
+export function negativo(ctx, imageData) {
+    if (!imageData) return;
+    let data = imageData.data;
+    for (let i = 0; i < data.length; i += 4) {
+        data[i] = 255 - data[i];     // R
+        data[i + 1] = 255 - data[i + 1]; // G
+        data[i + 2] = 255 - data[i + 2]; // B
     }
-
-    imageData.data = auxData; // Actualizo arreglo de pixeles
-
     ctx.putImageData(imageData, 0, 0); // Actualizo canvas
-});
+}
 
-btnBinarizacion.addEventListener("click", function () {
-
-    if (!data) return
+export function binarizacion(ctx, imageData) {
+    if (!imageData) return;
+    let data = imageData.data;
     let umbral = 128; // defino el limite entre 0 y 1
-    for (let i = 0; i < data.length; i += 4) {        
+    for (let i = 0; i < data.length; i += 4) {
         let avg = (data[i] + data[i + 1] + data[i + 2]) / 3; // Calculo prom escala de grises
         let valor;
         if (avg >= umbral) { // Aplico binarización
@@ -87,8 +55,52 @@ btnBinarizacion.addEventListener("click", function () {
         data[i + 1] = valor; // G
         data[i + 2] = valor; // B
     }
-
-    imageData.data = data; 
-
     ctx.putImageData(imageData, 0, 0);
-});
+}
+
+export function brillo(ctx, imageData, valorBrillo) {
+    const spanBrillo = document.getElementById("valorBrillo");
+    if (!imageData) return;
+    let data = imageData.data;
+    let brillo = 1 + (parseInt(valorBrillo) / 100);
+    spanBrillo.textContent = valorBrillo;
+    for (let i = 0; i < data.length; i += 4) {
+        data[i] *= brillo;     // R
+        data[i + 1] *= brillo; // G
+        data[i + 2] *= brillo; // B
+    }
+    ctx.putImageData(imageData, 0, 0);
+}
+
+export function red(ctx, imageData) {
+    if (!imageData) return;
+    let data = imageData.data;
+    for (let i = 0; i < data.length; i += 4) {
+        //data[i] = data[i];// R
+        data[i + 1] = 0; // G
+        data[i + 2] = 0; // B
+    }
+    ctx.putImageData(imageData, 0, 0);
+}
+
+export function green(ctx, imageData) {
+    if (!imageData) return;
+    let data = imageData.data;
+    for (let i = 0; i < data.length; i += 4) {
+        data[i] = 0;// R
+        //data[i + 1] = data[i + 1] // G
+        data[i + 2] = 0; // B
+    }
+    ctx.putImageData(imageData, 0, 0);
+}
+
+export function blue(ctx, imageData) {
+    if (!imageData) return;
+    let data = imageData.data;
+    for (let i = 0; i < data.length; i += 4) {
+        data[i] = 0;// R
+        data[i + 1] = 0; // G
+        //data[i + 2] = 0; // B
+    }
+    ctx.putImageData(imageData, 0, 0);
+}

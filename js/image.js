@@ -1,10 +1,11 @@
-import { ctx } from './paint.js';
+import { canvas, ctx } from './paint.js';
 
 export let imageData;
 export const img = new Image();
 export let imageDataOriginal;
 
 let cargaImagen = document.getElementById("cargaImagen");
+
 
 
 // --------------------------------------------------
@@ -19,11 +20,14 @@ cargaImagen.addEventListener("change", function (e) {
         img.src = evento.target.result; // Pasa la URL base64 de la imagen
     }
     lector.readAsDataURL(archivo); // Lee el archivo como URL
+   
 });
 
 img.onload = () => { //Cargo imageData
-    ctx.drawImage(img, 0, 0, img.width, img.height);
-    imageData = ctx.getImageData(0, 0, img.width, img.height);
+    canvas.height = img.height;
+    canvas.width = img.width;
+    ctx.drawImage(img, 0, 0, canvas.width, canvas.height);
+    imageData = ctx.getImageData(0, 0, canvas.width, canvas.height);
     imageDataOriginal = new ImageData(new Uint8ClampedArray(imageData.data), imageData.width, imageData.height);
 };
 

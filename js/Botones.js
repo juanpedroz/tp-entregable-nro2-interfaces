@@ -30,9 +30,13 @@ document.getElementById("btn-r").addEventListener("click", () => filtrosSimples.
 document.getElementById("btn-g").addEventListener("click", () => filtrosSimples.green(ctx, imageData));
 document.getElementById("btn-b").addEventListener("click", () => filtrosSimples.blue(ctx, imageData));
 
+let btnComic = document.getElementById("btn-comic"); 
+btnComic.addEventListener("click", () => filtrosSimples.comic(ctx,imageData, btnComic.value));
+
 // --------------------------------------------------
 // Comportamiento botones de filtros avanzados
 // --------------------------------------------------
+
 let btnSaturacion = document.getElementById("btn-saturacion");
 btnSaturacion.addEventListener("change", () => {
     if (!imageData){

@@ -1,3 +1,7 @@
+// --------------------------------------------------
+// Funciones de filtros avanzados
+// --------------------------------------------------
+
 export function saturacion(ctx, imageData, nivel) {
     if (!imageData) return;
     const data = imageData.data;

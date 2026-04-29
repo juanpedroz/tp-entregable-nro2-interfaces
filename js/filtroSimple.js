@@ -1,4 +1,5 @@
 import { restaurarImagen } from './image.js';
+
 // --------------------------------------------------
 // Funciones de filtros simples
 // --------------------------------------------------
@@ -106,4 +107,19 @@ export function blue(ctx, imageData) {
         //data[i + 2] = 0; // B
     }
     ctx.putImageData(imageData, 0, 0);
+}
+
+export function comic(ctx, imageData, niveles) {
+    if (!imageData) return;
+    restaurarImagen();
+    let data = imageData.data;
+    // 'niveles' puede ser un valor entre 2 y 15)
+    for (let i = 0; i < data.length; i += 4) {
+        // Aplicamos la fórmula a cada canal de color
+        data[i] = Math.floor(data[i] / (256 / niveles)) * (255 / (niveles - 1)); // R
+        data[i + 1] = Math.floor(data[i + 1] / (256 / niveles)) * (255 / (niveles - 1)); // G
+        data[i + 2] = Math.floor(data[i + 2] / (256 / niveles)) * (255 / (niveles - 1)); // B
+    }
+    ctx.putImageData(imageData, 0, 0);
+
 }

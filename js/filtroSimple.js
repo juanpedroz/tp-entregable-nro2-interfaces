@@ -1,4 +1,4 @@
-
+import { restaurarImagen } from './image.js';
 // --------------------------------------------------
 // Funciones de filtros simples
 // --------------------------------------------------
@@ -74,6 +74,7 @@ export function brillo(ctx, imageData, valorBrillo) {
 
 export function red(ctx, imageData) {
     if (!imageData) return;
+    restaurarImagen();
     let data = imageData.data;
     for (let i = 0; i < data.length; i += 4) {
         //data[i] = data[i];// R
@@ -85,6 +86,7 @@ export function red(ctx, imageData) {
 
 export function green(ctx, imageData) {
     if (!imageData) return;
+    restaurarImagen();
     let data = imageData.data;
     for (let i = 0; i < data.length; i += 4) {
         data[i] = 0;// R
@@ -96,6 +98,7 @@ export function green(ctx, imageData) {
 
 export function blue(ctx, imageData) {
     if (!imageData) return;
+    restaurarImagen();
     let data = imageData.data;
     for (let i = 0; i < data.length; i += 4) {
         data[i] = 0;// R

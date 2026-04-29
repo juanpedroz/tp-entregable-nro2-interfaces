@@ -80,15 +80,15 @@ function limpiarCanvas(){
 }
 
 document.getElementById("btn-guardar").addEventListener("click", () => {
-    // 1. Convertir el canvas a una URL de imagen (formato PNG por defecto)
+    //Convertir el canvas a una URL de imagen (formato PNG por defecto)
     const dataURL = canvas.toDataURL("image/png");
     
-    // 2. Crear un elemento <a> temporal
+    //Crear un elemento <a> temporal
     const enlace = document.createElement("a");
     enlace.href = dataURL;
     enlace.download = "mi-dibujo.png"; // Nombre del archivo al descargar
     
-    // 3. Simular el clic y eliminar el elemento
+    //Simular el clic y eliminar el elemento
     enlace.click();
 });
 
